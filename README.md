@@ -1,62 +1,33 @@
-# douban_sentiment_analysis
-基于朴素贝叶斯实现的豆瓣影评情感分析
+# 基于机器学习的豆瓣影评情感分析
 
-详细流程请看 <https://juejin.cn/post/6844903941226921991>
+![机器学习](https://img.shields.io/badge/ML-Machine%20Learning-blue)
+![自然语言处理](https://img.shields.io/badge/NLP-Sentiment%20Analysis-green)
+![Python](https://img.shields.io/badge/Python-3.8%2B-yellow)
 
-语料来自与豆瓣Top250排行榜中的影评，基于Scrapy抓取，大约5w条影评，好评差评各占50%。
+一个使用多种机器学习算法对豆瓣影评进行情感分析的综合性项目。本项目旨在分析影评文本的情感倾向（积极/消极），探索不同模型在情感分析任务上的表现。
 
-豆瓣影评爬虫 <https://github.com/3inchtime/douban_movie_review>
+## 🧠 模型设计
 
-训练集与测试集4:1，结果准确率约为80%-79%之间。
+项目计划实现以下四种机器学习方法进行对比分析：
 
-因为电影评论中有很大一部分好评中会有负面情感的词语，例如在纪录片《海豚湾》
+| 模型类型 | 算法 |
+|----------|------|
+| **传统机器学习** | 朴素贝叶斯 (Naive Bayes) |
+| **传统机器学习** | 逻辑回归 (Logistic Regression) |
+| **集成学习** | 随机森林 (Random Forest) |
+| **深度学习** | BERT 预训练模型 |
 
-> 我觉得大部分看本片会有感的人，都不知道，中国的白暨豚已经灭绝8年了，也不会知道，长江里的江豚也仅剩1000左右了。与其感慨，咒骂日本人如何捕杀海豚，不如做些实际的事情，保护一下长江里的江豚吧，没几年，也将绝迹了。中国人做出来的事情，也不会比小日本好到哪儿去。
+## 📚 参考来源
 
-所以说如果将这种类似的好评去除，则可以提高准确率。
+本项目设计参考并借鉴了以下优秀的开源项目：
+- [aeternae/IMDb_Review](https://github.com/aeternae/IMDb_Review/blob/master/README.md)
+- [3inchtime/douban_sentiment_analysis](https://github.com/3inchtime/douban_sentiment_analysis)
 
-```bash
-// 测试训练
-python native_bayes_test.py
+## ⚙️ 如何使用
+（项目结构和使用方法详情待补充）
 
-Building prefix dict from the default dictionary ...
-Loading model from cache /tmp/jieba.cache
-Loading model cost 0.572 seconds.
-Prefix dict has been built succesfully.
-训练集数量： 40906
-测试集数量： 10226
-测试集准确率： 0.8043380027112517
+## 📊 结果分析
+（模型性能比较和可视化分析待补充）
 
-// 训练模型
-python native_bayes_train.py
-
-Building prefix dict from the default dictionary ...
-Loading model from cache /tmp/jieba.cache
-Loading model cost 0.570 seconds.
-Prefix dict has been built succesfully.
-训练集数量： 40906
-测试集数量： 10226
-训练完成
-
-``` 
-
-#### Example
-
-```Python
-from native_bayes_sentiment_analyzer import SentimentAnalyzer
-
-model_path = './data/bayes.pkl'
-userdict_path = './data/userdict.txt'
-stopword_path = './data/stopwords.txt'
-corpus_path = './data/review.csv'
-
-text = '倍感失望的一部诺兰的电影，感觉更像是盗梦帮的一场大杂烩。虽然看之前就知道肯定是一部无法超越前传2的蝙蝠狭，但真心没想到能差到这个地步。节奏的把控的失误和角色的定位模糊绝对是整部影片的硬伤。'
-
-# 初始化分析器实例
-analyzer = SentimentAnalyzer(model_path=model_path, stopword_path=stopword_path, userdict_path=userdict_path)
-
-analyzer.analyze(text=text)
-
-## 好评： 0.738 差评： 0.262
-
-```
+## 📄 许可证
+本项目采用 [MIT 许可证](LICENSE)

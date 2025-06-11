@@ -3,14 +3,11 @@ import os
 import csv
 import random
 import pickle
-
 import numpy as np
 import jieba
-
-
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 # from sklearn.naive_bayes import MultinomialNB
-from models import MultinomialNB
+from models.native_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 jieba.load_userdict("./data/userdict.txt")
