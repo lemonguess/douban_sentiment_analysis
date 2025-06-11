@@ -1,57 +1,26 @@
 # -*- coding: utf-8 -*-
-import os
-import csv
-import random
 import pickle
 import numpy as np
-import jieba
+
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-# from sklearn.naive_bayes import MultinomialNB
-from models.native_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB
+# from models.native_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-jieba.load_userdict("./data/userdict.txt")
+from utils import load_stopwords, load_corpus, review_to_text
+
+
 
 
 file_path = './data/review.csv'
-model_export_path = './data/bayes.pkl'
-stopword_path = './data/stopwords.txt'
+model_export_path = './checkpoint/bayes1.pkl'
 
 
-def load_corpus(corpus_path):
-    with open(corpus_path, 'r') as f:
-        reader = csv.reader(f)
-        rows = [row for row in reader]
-
-    review_data = np.array(rows).tolist()
-    # 打乱数据顺序
-    random.shuffle(review_data)
-
-    review_list = []
-    sentiment_list = []
-    for words in review_data:
-        review_list.append(words[1])
-        sentiment_list.append(words[0])
-
-    return review_list, sentiment_list
 
 
-def load_stopwords(file_path):
-    stop_words = []
-    with open(file_path, encoding='UTF-8') as words:
-       stop_words.extend([i.strip() for i in words.readlines()])
-    return stop_words
 
 
-# jieba分词
-def review_to_text(review):
-    stop_words = load_stopwords(stopword_path)
-    review = jieba.cut(review)
-    all_stop_words = set(stop_words)
-    # 去掉停用词
-    review_words = [w for w in review if w not in all_stop_words]
 
-    return review_words
 def train():
     review_list, sentiment_list = load_corpus(file_path)
     # 将全部的语料按1:4分为测试集与训练集
