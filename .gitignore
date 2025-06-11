@@ -8,10 +8,10 @@ data/bayes.pkl
 __pycache__/
 *.py[cod]
 *$py.class
-
+checkpoint/
 # C extensions
 *.so
-
+.venv/
 # Distribution / packaging
 .Python
 build/
